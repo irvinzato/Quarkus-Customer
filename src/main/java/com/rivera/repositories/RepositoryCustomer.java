@@ -32,16 +32,15 @@ public class RepositoryCustomer {
   }
 
   @Transactional
-  public void editCustomer(Long id, Customer customer){
-    Customer findCustomer = (Customer) entityManager.createQuery("SELECT c FROM Customer c WHERE c.id=:idParam")
-            .setParameter("idParam", id)
-            .getSingleResult();
+  public Customer editCustomer(Long id, Customer customer){
+    Customer findCustomer = byId(id);
     findCustomer.setCode(customer.getCode());
     findCustomer.setPhone(customer.getPhone());
     findCustomer.setNames(customer.getNames());
     findCustomer.setAddress(customer.getAddress());
     findCustomer.setSurname(customer.getSurname());
     findCustomer.setAccountNumber(customer.getAccountNumber());
+    return entityManager.merge(findCustomer);
   }
 
   @Transactional

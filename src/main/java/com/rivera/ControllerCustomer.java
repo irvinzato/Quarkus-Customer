@@ -34,6 +34,13 @@ public class ControllerCustomer {
         return Response.ok(customer).build();
     }
 
+    @GET
+    @Path("/{id}/product")
+    public Response findByIdProducts(@PathParam("id") Long id){
+        //En construcción funcionamiento
+        return Response.ok().build();
+    }
+
     @DELETE
     @Path("/borrar/{id}")
     public Response deleteCustomer(@PathParam("id") Long id) {
@@ -44,8 +51,8 @@ public class ControllerCustomer {
     @PUT
     @Path("/editar/{id}")
     public Response editCustomer(@PathParam("id") Long id, Customer customer) {
-        repositoryCustomer.editCustomer(id, customer);
-        return Response.ok("Cliente actualizado correctamente").build();
+        Customer customerUpdate = repositoryCustomer.editCustomer(id, customer);
+        return Response.ok(customerUpdate).build();
     }
 
 
